@@ -16,7 +16,7 @@ import { IconName } from '../icon-names';
         @if (id==="status") {
         <span class="status-badge">Unpaid</span>
         } @else {
-        <input type="text" placeholder="Enter {{ label }}" />
+        <input type="text" placeholder="Enter {{ label }}" autocomplete="off" />
         }
       </div>
     </div>
