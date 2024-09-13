@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+/* Importing Bootstrap SCSS file. */
+@import "bootstrap/scss/bootstrap";
+
+* {
+  font-family: "Circular-Std";
+}
+
+body {
+  background-color: #fbfcfd;
+  line-height: normal;
+}
+
+.divider {
+  border-top: 1px solid rgba(230, 235, 240, 1);
+  width: 100%;
+}
