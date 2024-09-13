@@ -18,7 +18,7 @@ import { IconName } from './icon-names';
   ],
   // templateUrl: './app.component.html',
   template: `<main class="main-content">
-    <div>Content</div>
+    <!-- <div>Content</div> -->
     <aside
       class="ticket"
       style="max-width: 591px; width: 100%; height: 100vh; background-color: white;"
