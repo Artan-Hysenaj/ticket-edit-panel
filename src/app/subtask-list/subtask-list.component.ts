@@ -2,13 +2,16 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  inject,
+  OnInit,
   Output,
-  output,
   QueryList,
   ViewChildren,
 } from '@angular/core';
 import { IconComponent } from '../icon/icon.component';
 import { FormsModule } from '@angular/forms';
+import { Subtask } from '../subtask';
+import { SubtaskService } from '../subtask.service';
 
 @Component({
   selector: 'app-subtask-list',
@@ -51,17 +54,9 @@ import { FormsModule } from '@angular/forms';
   `,
   styleUrl: './subtask-list.component.scss',
 })
-export class SubtaskListComponent {
-  subtasks = [
-    { id: 1, name: 'Send invoice to collections agency', completed: false },
-    { id: 2, name: 'Write an email to them to follow-up', completed: true },
-    { id: 3, name: 'Send paper mail to account', completed: false },
-    {
-      id: 4,
-      name: 'This is my new subtask... I’m autofocused here when I add a subtask',
-      completed: false,
-    },
-  ];
+export class SubtaskListComponent implements OnInit {
+  subtaskService: SubtaskService = inject(SubtaskService);
+  subtasks: Subtask[] = [];
 
   @Output() totalSubtasks = new EventEmitter<number>();
   @Output() completedSubtasks = new EventEmitter<number>();
@@ -70,6 +65,8 @@ export class SubtaskListComponent {
   private focusNewSubtask = false;
 
   ngOnInit() {
+    this.subtasks = this.subtaskService.getAll();
+
     this.emitSubtaskCounts();
   }
 
@@ -85,7 +82,9 @@ export class SubtaskListComponent {
       this.focusLastSubtask();
       return;
     }
-    this.subtasks.push({ id: Math.random(), name: '', completed: false });
+
+    const newSubtask: Subtask = { id: Date.now(), name: '', completed: false };
+    this.subtaskService.add(newSubtask);
     this.focusNewSubtask = true;
     this.emitSubtaskCounts();
   }
@@ -99,9 +98,8 @@ export class SubtaskListComponent {
 
   emitSubtaskCounts() {
     this.totalSubtasks.emit(this.subtasks.length);
-    const completedCount = this.subtasks.filter(
-      (subtask) => subtask.completed
-    ).length;
-    this.completedSubtasks.emit(completedCount);
+    this.completedSubtasks.emit(
+      this.subtasks.filter((subtask) => subtask.completed).length
+    );
   }
 }
