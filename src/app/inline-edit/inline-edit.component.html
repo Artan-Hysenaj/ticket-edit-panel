@@ -1,0 +1,18 @@
+<div class="inline-edit d-flex align-items-center mb-1">
+  <label [for]="id" class="col-4">
+    <app-icon [size]="16" [icon]="icon"></app-icon>
+    <span>{{ label }}</span>
+  </label>
+  <div class="inline-edit--control col-8 d-flex align-content-center">
+    @if (id==="status") {
+    <span class="status-badge">Unpaid</span>
+    } @else {
+    <input
+      [id]="id"
+      type="text"
+      placeholder="Enter {{ label }}..."
+      autocomplete="off"
+    />
+    }
+  </div>
+</div>

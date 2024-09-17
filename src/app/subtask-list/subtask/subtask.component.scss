@@ -1,0 +1,64 @@
+li {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  padding: 8px;
+  border: none;
+  border-top: 1px solid rgba(233, 238, 249, 1);
+  background-color: rgba(255, 255, 255, 1);
+
+  &:hover {
+    background-color: rgba(241, 243, 248, 1);
+  }
+
+  .form-check-input {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    border-radius: 9px;
+    border: 1px solid rgba(233, 238, 249, 1);
+    background-color: rgba(104, 113, 150, 0.1);
+    background-size: auto;
+
+    &:checked[type="checkbox"] {
+      border: 1px solid rgba(62, 64, 219, 0.2);
+      background-color: rgba(62, 64, 219, 0.1);
+      --bs-form-check-bg-image: url("../../../assets/icon-checkmark.svg");
+    }
+
+    &:focus {
+      box-shadow: none;
+      border: 1px solid rgba(62, 64, 219, 0.2);
+    }
+  }
+
+  .form-text-input {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    color: rgba(104, 113, 150, 1);
+    font-size: 14px;
+    font-weight: 500;
+    font-style: Regular;
+
+    &::placeholder {
+      color: rgba(164, 170, 192, 1);
+      font-size: 14px;
+      font-weight: 500;
+      font-style: Regular;
+    }
+
+    &:hover {
+      background-color: rgba(241, 243, 248, 1);
+    }
+
+    &:focus {
+      outline: none;
+      color: rgba(3, 9, 41, 1);
+      font-size: 14px;
+      font-weight: 500;
+      font-style: Regular;
+    }
+  }
+}

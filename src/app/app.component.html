@@ -1,0 +1,32 @@
+<main class="main-content">
+  <div>
+    <!-- empty space -->
+  </div>
+  <app-aside>
+    <app-header title="Mega Electronix" subtitle="Edit task" />
+
+    <app-divider />
+
+    <app-navigation [activeTab]="activeTab" (tabChange)="onTabChange($event)" />
+
+    <app-divider />
+
+    <div>
+      <app-tab [isActive]="activeTab === 'tab1'">
+        <app-subtask-list />
+      </app-tab>
+
+      <app-tab [isActive]="activeTab === 'tab2'">
+        <!-- Content for Tab 2 -->
+      </app-tab>
+
+      <app-tab [isActive]="activeTab === 'tab3'">
+        <!-- Content for Tab 3 -->
+      </app-tab>
+
+      <app-tab [isActive]="activeTab === 'tab4'">
+        <!-- Content for Tab 4 -->
+      </app-tab>
+    </div>
+  </app-aside>
+</main>

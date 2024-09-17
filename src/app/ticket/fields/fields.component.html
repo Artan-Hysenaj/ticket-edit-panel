@@ -1,0 +1,15 @@
+<div>
+  <app-ai-prompt
+    message="Ask Logic Pilot to generate subtasks or to summarize comments"
+  />
+
+  <form>
+    @for (field of fields; track field.id) {
+    <app-inline-edit
+      [id]="field.id"
+      [label]="field.label"
+      [icon]="field.icon"
+    />
+    }
+  </form>
+</div>

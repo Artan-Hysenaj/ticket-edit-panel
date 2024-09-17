@@ -1,0 +1,11 @@
+.ticket {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  box-shadow: -5px 0px 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+
+  max-width: 591px;
+  width: 100%;
+  height: 100vh;
+  background-color: white;
+}

@@ -1,73 +1,43 @@
 import {
   Component,
   ElementRef,
-  EventEmitter,
   inject,
   OnInit,
-  Output,
   QueryList,
   ViewChildren,
 } from '@angular/core';
-import { IconComponent } from '../icon/icon.component';
 import { FormsModule } from '@angular/forms';
-import { Subtask } from '../subtask';
-import { SubtaskService } from '../subtask.service';
+import { IconComponent } from '../shared/icon/icon.component';
+import { SubtaskComponent } from './subtask/subtask.component';
+import { Subtask } from './subtask/subtask.model';
+import { FieldsComponent } from '../ticket/fields/fields.component';
+import { ProgressComponent } from '../shared/progress/progress.component';
+import { DividerComponent } from '../shared/divider/divider.component';
+import { SubtaskService } from './subtask/subtask.service';
 
 @Component({
   selector: 'app-subtask-list',
   standalone: true,
-  imports: [IconComponent, FormsModule],
-  template: `
-    <div class="subtasks--list">
-      <div class="datalist">
-        <h5 class="datalist-title">Subtask name</h5>
-        <ul class="datalist-group list-group">
-          @for (subtask of subtasks; track subtask.id) {
-          <li class="list-group-item datalist-group-item">
-            <input
-              [id]="subtask.id"
-              class="form-check-input"
-              type="checkbox"
-              [(ngModel)]="subtask.completed"
-              (ngModelChange)="emitSubtaskCounts()"
-            />
-
-            <input
-              #subtaskInput
-              [id]="subtask.id"
-              type="text"
-              class="form-text-input"
-              placeholder="New subtask"
-              [(ngModel)]="subtask.name"
-            />
-          </li>
-
-          }
-        </ul>
-
-        <button class="datalist-add btn" (click)="addSubtask()">
-          <app-icon [iconSize]="10" iconName="icon-addsubtask"></app-icon>
-          <span>Add subtask</span>
-        </button>
-      </div>
-    </div>
-  `,
+  imports: [
+    IconComponent,
+    FormsModule,
+    SubtaskComponent,
+    FieldsComponent,
+    ProgressComponent,
+    DividerComponent,
+  ],
+  templateUrl: './subtask-list.component.html',
   styleUrl: './subtask-list.component.scss',
 })
 export class SubtaskListComponent implements OnInit {
   subtaskService: SubtaskService = inject(SubtaskService);
   subtasks: Subtask[] = [];
 
-  @Output() totalSubtasks = new EventEmitter<number>();
-  @Output() completedSubtasks = new EventEmitter<number>();
-
   @ViewChildren('subtaskInput') subtaskInputs!: QueryList<ElementRef>;
   private focusNewSubtask = false;
 
   ngOnInit() {
     this.subtasks = this.subtaskService.getAll();
-
-    this.emitSubtaskCounts();
   }
 
   ngAfterViewChecked() {
@@ -77,8 +47,8 @@ export class SubtaskListComponent implements OnInit {
     }
   }
   addSubtask() {
-    const lastSubtask = this.subtasks[this.subtasks.length - 1];
-    if (lastSubtask.name === '') {
+    const lastSubtask = this.subtasks.at(-1);
+    if (lastSubtask?.name === '') {
       this.focusLastSubtask();
       return;
     }
@@ -86,7 +56,6 @@ export class SubtaskListComponent implements OnInit {
     const newSubtask: Subtask = { id: Date.now(), name: '', completed: false };
     this.subtaskService.add(newSubtask);
     this.focusNewSubtask = true;
-    this.emitSubtaskCounts();
   }
 
   private focusLastSubtask() {
@@ -96,10 +65,15 @@ export class SubtaskListComponent implements OnInit {
     }
   }
 
-  emitSubtaskCounts() {
-    this.totalSubtasks.emit(this.subtasks.length);
-    this.completedSubtasks.emit(
-      this.subtasks.filter((subtask) => subtask.completed).length
-    );
+  get totalSubtasks(): number {
+    return this.subtasks.length;
+  }
+  get completedSubtasks(): number {
+    return this.subtasks.filter((subtask) => subtask.completed).length;
+  }
+  get completionPercentage(): number {
+    return this.totalSubtasks === 0
+      ? 0
+      : (this.completedSubtasks / this.totalSubtasks) * 100;
   }
 }

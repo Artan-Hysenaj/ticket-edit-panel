@@ -1,0 +1,12 @@
+<div class="ticket-nav">
+  @for(navItem of navItems; track navItem.id){
+  <button
+    class="ticket-nav--item btn"
+    [class.active]="activeTab === navItem.id"
+    (click)="onTabChange(navItem.id)"
+  >
+    <app-icon [size]="12" [icon]="navItem.icon"></app-icon>
+    <span>{{ navItem.label }}</span>
+  </button>
+  }
+</div>

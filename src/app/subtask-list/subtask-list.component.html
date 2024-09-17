@@ -1,0 +1,28 @@
+<app-fields />
+
+<div class="subtasks-header">
+  <h4>Subtasks</h4>
+  <div class="d-flex align-items-center gap-2">
+    <app-progress [progress]="completionPercentage" />
+
+    <p>{{ completedSubtasks }}/{{ totalSubtasks }}</p>
+  </div>
+</div>
+
+<app-divider />
+
+<div class="subtasks-list">
+  <div class="datalist">
+    <h5 class="datalist-title">Subtask name</h5>
+    <ul class="datalist-group list-group">
+      @for (subtask of subtasks; track subtask.id) {
+      <app-subtask [subtask]="subtask" />
+      }
+    </ul>
+
+    <button class="datalist-add btn" (click)="addSubtask()">
+      <app-icon [size]="10" icon="icon-addsubtask"></app-icon>
+      <span>Add subtask</span>
+    </button>
+  </div>
+</div>

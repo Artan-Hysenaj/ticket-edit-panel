@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { DUMMY_SUBTASKS } from './dummy-subtasks';
-import { Subtask } from './subtask';
+import { DUMMY_SUBTASKS } from '../../dummy-subtasks';
+import { Subtask } from './subtask.model';
 
 @Injectable({
   providedIn: 'root',

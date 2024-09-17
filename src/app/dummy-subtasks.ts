@@ -1,4 +1,4 @@
-import { Subtask } from './subtask';
+import { Subtask } from './subtask-list/subtask/subtask.model';
 
 export const DUMMY_SUBTASKS: Subtask[] = [
   { id: 1, name: 'Send invoice to collections agency', completed: false },

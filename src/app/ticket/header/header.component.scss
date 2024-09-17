@@ -1,0 +1,21 @@
+header {
+  background-color: rgba(255, 255, 255, 1);
+  padding: 16px 24px 13px 24px;
+
+  &--title {
+    color: rgba(47, 48, 89, 1);
+    font-size: 20px;
+    font-weight: 500;
+    font-style: Book;
+    margin: 0 0 5px 0;
+    opacity: 1;
+  }
+
+  &--subtitle {
+    color: rgba(104, 113, 150, 1);
+    font-size: 16px;
+    font-weight: 400;
+    font-style: Book;
+    margin: 0;
+  }
+}
