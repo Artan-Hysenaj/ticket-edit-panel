@@ -12,9 +12,4 @@ import { FormsModule } from '@angular/forms';
 })
 export class SubtaskComponent {
   @Input({ required: true }) subtask!: Subtask;
-  // @Output()
-
-  emitSubtaskCounts() {
-    //.
-  }
 }
